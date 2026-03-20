@@ -19,14 +19,13 @@ function App() {
         window.localStorage.setItem('TODOLIST', JSON.stringify(todos));
     }, [todos])
 
-    const onCreate = (content) => {
+    const onCreate = (content, dueDate) => {
         const newTask = {
             id: idRef.current++,
             isDone: false,
             content: content,
-            date: new Date().getTime()
+            dueDate: dueDate ? new Date(dueDate) : null,
         }
-
         setTodos([newTask, ...todos])
     }
 
@@ -49,6 +48,19 @@ function App() {
         }))
     }
 
+    const onEdit = (targetId, newContent) => {
+        setTodos(todos.map((todo) => {
+            if (todo.id == targetId) {
+                return {
+                    ...todo,
+                    content: newContent
+                    //todo.dueDate = newDate
+                }
+            }
+            return todo
+        }))
+    }
+
     return (
         <div className='App'>
             <Header />
@@ -56,7 +68,9 @@ function App() {
             <List
                 todos={todos}
                 onUpdate={onUpdate}
-                onDelete={onDelete} />
+                onDelete={onDelete}
+                onEdit={onEdit}
+                 />
         </div>
     )
 }

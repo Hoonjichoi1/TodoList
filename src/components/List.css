@@ -4,8 +4,12 @@
     gap: 20px;
 }
 
+.List .filter {
+    display: flex;
+}
+
 .List input {
-    width: 100%;
+    width: 80%;
     border: none;
     border-bottom: 1px solid rgb(220, 220, 220);
     padding: 15px 0px;
@@ -13,7 +17,17 @@
 
 .List input:focus {
     outline: none;
-    border-bottom: 1px solid rgb(37, 147, 255);;
+    border-bottom: 1px solid rgb(37, 147, 255);
+    ;
+}
+
+.List select {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgb(220, 220, 220);
+    font-size: 14px;
+    height: 30px;
 }
 
 .List .todos_wrapper {

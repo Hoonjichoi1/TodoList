@@ -27,3 +27,35 @@
     border-radius: 5px;
     padding: 5px;
 }
+
+.ToDoItem .editing {
+    flex : 1;
+}
+
+.ToDoItem .urgent .circle {
+  width: 10px; 
+  height: 10px;
+  background-color: rgb(240, 102, 102); 
+  border-radius: 50%;
+}
+
+.ToDoItem .warning .circle {
+  width: 10px;         /* Set equal width and height */
+  height: 10px;
+  background-color: rgb(245, 222, 69); /* Add color to make it visible */
+  border-radius: 50%;   /* Transform the square into a circle */
+}
+
+.ToDoItem .safe .circle {
+  width: 10px;         /* Set equal width and height */
+  height: 10px;
+  background-color: rgb(178, 235, 160); /* Add color to make it visible */
+  border-radius: 50%;   /* Transform the square into a circle */
+}
+
+.ToDoItem .safe .null {
+  width: 10px;         /* Set equal width and height */
+  height: 10px;
+  background-color: white; /* Add color to make it visible */
+  border-radius: 50%;   /* Transform the square into a circle */
+}
