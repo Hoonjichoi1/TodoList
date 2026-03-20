@@ -1,12 +1,23 @@
 import './App.css'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Header from './components/Header'
 import Editor from './components/Editor'
 import List from './components/List'
 
 function App() {
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState(() => {
+        const data = localStorage.getItem('TODOLIST');
+        if (data) {
+            return JSON.parse(data);
+        }
+        return [];
+    });
+
     const idRef = useRef(0);
+
+    useEffect(() => {
+        window.localStorage.setItem('TODOLIST', JSON.stringify(todos));
+    }, [todos])
 
     const onCreate = (content) => {
         const newTask = {
@@ -33,7 +44,7 @@ function App() {
 
     const onDelete = (targetId) => {
         setTodos(todos.filter((todo) => {
-            if (todo.id !== targetId) 
+            if (todo.id !== targetId)
                 return todo
         }))
     }
