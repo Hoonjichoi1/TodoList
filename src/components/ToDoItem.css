@@ -32,6 +32,19 @@
     flex : 1;
 }
 
+.ToDoItem .date {
+    font-size: 14px;
+    color: gray;
+    width: 90px;
+    text-align: center;
+}
+
+.ToDoItem input[type="date"] {
+    width: 90px;
+    border: none;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
 .ToDoItem .urgent .circle {
   width: 10px; 
   height: 10px;

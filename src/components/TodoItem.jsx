@@ -1,7 +1,7 @@
 import './ToDoItem.css'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
-const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit}) => {
+const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit, onEditDueDate }) => {
 
     const onChangeCheckBox = () => {
         onUpdate(id);
@@ -13,21 +13,26 @@ const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit}) =
 
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState("");
+    const [editDueDate, setEditDueDate] = useState(dueDate || "");
+
     const onClickEditButton = () => {
         setIsEditing(true);
-        setEditContent(content)
-    }
-    const onEditing = (e) => {
-        setEditContent(e.target.value)
+        setEditContent(content);
+        setEditDueDate(dueDate || "");
     }
     const onClickSaveButton = () => {
         onEdit(id, editContent);
+        onEditDueDate(id, editDueDate);
         setIsEditing(false);
     }
 
-    const daysLeft = Math.ceil((new Date(dueDate) - new Date()) / (1000 * 60 * 60 * 24));
+    const daysLeft = dueDate ?
+    Math.ceil((new Date(dueDate) - new Date()) / (1000 * 60 * 60 * 24))
+    :
+    null;
+
     const getPriority = () => {
-        if (dueDate == null) {
+        if (!dueDate) {
             return "none"
         }
         else if (daysLeft <= 3) {
@@ -48,17 +53,26 @@ const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit}) =
             {isEditing ? (
                 <input className='editing'
                     value={editContent}
-                    onChange={onEditing}></input>
+                    onChange={(e) => setEditContent(e.target.value)}>
+                </input>
             ) : (
                 <div className="content">{content}</div>
             )}
             <div className={getPriority()}>
                 <div className="circle"></div>
             </div>
-            {dueDate && (
-                <div className="date">
-                    {new Date(dueDate).toLocaleDateString()}
-                </div>
+            {isEditing ? (
+                <input
+                    type="date"
+                    value={editDueDate}
+                    onChange={(e) => setEditDueDate(e.target.value)}
+                ></input>
+            ) : (
+                dueDate && (
+                    <div className="date">
+                        {new Date(dueDate).toLocaleDateString()}
+                    </div>
+                )
             )}
 
             {isEditing ? (

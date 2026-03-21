@@ -24,9 +24,13 @@ function App() {
             id: idRef.current++,
             isDone: false,
             content: content,
-            dueDate: dueDate ? new Date(dueDate) : null,
+            dueDate: dueDate || "",
         }
-        setTodos([newTask, ...todos])
+        setTodos([newTask, ...todos].sort((a, b) => {
+            if (!a.dueDate) return 1;
+            if (!b.dueDate) return -1;
+            return new Date(a.dueDate) - new Date(b.dueDate);
+        }))
     }
 
     const onUpdate = (targetId) => {
@@ -42,10 +46,8 @@ function App() {
     }
 
     const onDelete = (targetId) => {
-        setTodos(todos.filter((todo) => {
-            if (todo.id !== targetId)
-                return todo
-        }))
+        setTodos(todos.filter((todo) =>
+            todo.id !== targetId))
     }
 
     const onEdit = (targetId, newContent) => {
@@ -54,7 +56,18 @@ function App() {
                 return {
                     ...todo,
                     content: newContent
-                    //todo.dueDate = newDate
+                }
+            }
+            return todo
+        }))
+    }
+
+    const onEditDueDate = (targetId, newDueDate) => {
+        setTodos(todos.map((todo) => {
+            if (todo.id == targetId) {
+                return {
+                    ...todo,
+                    dueDate: newDueDate || ""
                 }
             }
             return todo
@@ -64,13 +77,16 @@ function App() {
     return (
         <div className='App'>
             <Header />
-            <Editor onCreate={onCreate} />
+            <Editor
+                onCreate={onCreate}
+            />
             <List
                 todos={todos}
                 onUpdate={onUpdate}
                 onDelete={onDelete}
                 onEdit={onEdit}
-                 />
+                onEditDueDate={onEditDueDate}
+            />
         </div>
     )
 }

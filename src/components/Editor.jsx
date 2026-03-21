@@ -3,7 +3,7 @@ import { useState, useRef } from 'react'
 
 const Editor = ({ onCreate }) => {
     const [content, setContent] = useState("");
-    const [date, setDate] = useState();
+    const [date, setDate] = useState("");
     const contentRef = useRef();
 
     const onChangeContent = (e) => {

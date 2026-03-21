@@ -2,7 +2,7 @@ import './List.css'
 import TodoItem from './TodoItem';
 import { useState } from 'react'
 
-const List = ({ todos, onUpdate, onDelete, onEdit }) => {
+const List = ({ todos, onUpdate, onDelete, onEdit, onEditDueDate }) => {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("all");
 
@@ -58,7 +58,8 @@ const List = ({ todos, onUpdate, onDelete, onEdit }) => {
                         onUpdate={onUpdate}
                         onDelete={onDelete}
                         onEdit={onEdit}
-                        />
+                        onEditDueDate={onEditDueDate}
+                    />
                 })}
             </div>
         </div>
