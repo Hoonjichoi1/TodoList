@@ -27,9 +27,9 @@ const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit, on
     }
 
     const daysLeft = dueDate ?
-    Math.ceil((new Date(dueDate) - new Date()) / (1000 * 60 * 60 * 24))
-    :
-    null;
+        Math.ceil((new Date(dueDate) - new Date()) / (1000 * 60 * 60 * 24))
+        :
+        null;
 
     const getPriority = () => {
         if (!dueDate) {
@@ -56,7 +56,11 @@ const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit, on
                     onChange={(e) => setEditContent(e.target.value)}>
                 </input>
             ) : (
-                <div className="content">{content}</div>
+                isDone ? (
+                    <div className="content_done">{content}</div>
+                ) : (
+                    <div className="content">{content}</div>
+                )
             )}
             <div className={getPriority()}>
                 <div className="circle"></div>

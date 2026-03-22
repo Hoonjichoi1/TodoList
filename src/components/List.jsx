@@ -28,7 +28,20 @@ const List = ({ todos, onUpdate, onDelete, onEdit, onEditDueDate }) => {
         }
     }
 
-    const filteredtodos = getFilteredData();
+    const getPrioritySort = (task) => {
+        if (task.isDone && !task.dueDate) return 3;
+        if (task.isDone && task.dueDate) return 2;
+        if (!task.dueDate) return 1;
+        else return 0;
+    }
+
+    const filteredtodos = getFilteredData().sort((a, b) => {
+        const priorityA = getPrioritySort(a);
+        const priorityB = getPrioritySort(b);
+
+        if (priorityA !== priorityB) return priorityA - priorityB;
+        if (priorityA === priorityB) return new Date(a.dueDate) - new Date(b.dueDate);;
+    })
 
     const onSelect = (e) => {
         setFilter(e.target.value);
@@ -51,6 +64,7 @@ const List = ({ todos, onUpdate, onDelete, onEdit, onEditDueDate }) => {
                         value='inprogress'> In Progree</option>
                 </select>
             </div>
+            {todos.length > 0 ? (
             <div className="todos_wrapper">
                 {filteredtodos.map((todo) => {
                     return <TodoItem
@@ -62,6 +76,7 @@ const List = ({ todos, onUpdate, onDelete, onEdit, onEditDueDate }) => {
                     />
                 })}
             </div>
+            ) : (<p> No tasks yet ! </p>)}
         </div>
     )
 }
