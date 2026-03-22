@@ -79,15 +79,19 @@ const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit, on
                 )
             )}
 
-            {isEditing ? (
-                <button onClick={onClickSaveButton}
-                >Save</button>
-            ) : (
-                <button onClick={onClickEditButton}
-                >Edit</button>
-            )}
-            <button onClick={onClickDeleteButton}
-            >Delete</button>
+            <div className='actions'>
+                {isEditing ? (
+                    <button onClick={onClickSaveButton}
+                    >Save</button>
+                ) : (
+                    <button onClick={onClickEditButton}
+                    >Edit</button>
+                )}
+                <button
+                    onClick={onClickDeleteButton}
+                    className='delete'
+                >Delete</button>
+            </div>
         </div>
     )
 }

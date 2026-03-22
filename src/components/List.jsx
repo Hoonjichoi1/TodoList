@@ -54,8 +54,9 @@ const List = ({ todos, onUpdate, onDelete, onEdit, onEditDueDate }) => {
                 <input
                     value={search}
                     onChange={onChangeSearch}
-                    placeholder='Enter Keywords To Search'></input>
-                <select onChange={onSelect}> Select filter
+                    placeholder='Enter keywords to search'></input>
+                <select className='filter-tabs'
+                    onChange={onSelect}> Select filter
                     <option
                         value='all'> Select filter </option>
                     <option
@@ -65,17 +66,17 @@ const List = ({ todos, onUpdate, onDelete, onEdit, onEditDueDate }) => {
                 </select>
             </div>
             {todos.length > 0 ? (
-            <div className="todos_wrapper">
-                {filteredtodos.map((todo) => {
-                    return <TodoItem
-                        key={todo.id} {...todo}
-                        onUpdate={onUpdate}
-                        onDelete={onDelete}
-                        onEdit={onEdit}
-                        onEditDueDate={onEditDueDate}
-                    />
-                })}
-            </div>
+                <div className="todos_wrapper">
+                    {filteredtodos.map((todo) => {
+                        return <TodoItem
+                            key={todo.id} {...todo}
+                            onUpdate={onUpdate}
+                            onDelete={onDelete}
+                            onEdit={onEdit}
+                            onEditDueDate={onEditDueDate}
+                        />
+                    })}
+                </div>
             ) : (<p> No tasks yet ! </p>)}
         </div>
     )
