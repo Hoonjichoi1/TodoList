@@ -15,7 +15,7 @@ function App() {
             await addDoc(collection(db, 'todos'), {
                 id: idRef.current++,
                 content: content,
-                idDone: false,
+                isDone: false,
                 dueDate: dueDate || "",
             })
     }
