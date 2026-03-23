@@ -74,7 +74,7 @@ const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit, on
             ) : (
                 dueDate && (
                     <div className="date">
-                        {new Date(dueDate).toLocaleDateString()}
+                        {new Date(dueDate + 'T00:00:00').toLocaleDateString()}
                     </div>
                 )
             )}
