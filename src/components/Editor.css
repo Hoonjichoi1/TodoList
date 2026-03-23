@@ -48,6 +48,7 @@
     background: #333;
 }
 
-.Editor .contentRef.focus {
-    color: red;
+.Editor input:focus {
+    outline: 1px solid #eae9e4;
+    border-radius: 8px;
 }
