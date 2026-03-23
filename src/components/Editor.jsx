@@ -17,6 +17,7 @@ const Editor = ({ onCreate }) => {
     const onSubmit = () => {
         if (content === "") {
             contentRef.current.focus()
+            // alert('Please enter a valid name of the task')
             return;
         }
         onCreate(content, date);

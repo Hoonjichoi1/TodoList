@@ -13,7 +13,7 @@ const ToDoItem = ({ id, isDone, content, dueDate, onUpdate, onDelete, onEdit, on
 
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState("");
-    const [editDueDate, setEditDueDate] = useState(dueDate || "");
+    const [editDueDate, setEditDueDate] = useState(dueDate ?? "");
 
     const onClickEditButton = () => {
         setIsEditing(true);
